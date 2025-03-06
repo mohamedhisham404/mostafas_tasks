@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import dotenv from "dotenv";
 import sequelize from "../config/database.js";
 import BookRoutes from './routes/BookRoutes.js';
+import AuthRoutes from './routes/AuthRoutes.js';
 
 dotenv.config(); 
 
@@ -37,6 +38,7 @@ async function startApp() {
 
   // Routes
   app.use('/books', BookRoutes);
+  app.use('/', AuthRoutes);
   
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
