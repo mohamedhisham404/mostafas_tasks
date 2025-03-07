@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from "dotenv";
+import cookieParser from 'cookie-parser';
 import sequelize from "../config/database.js";
 import BookRoutes from './routes/BookRoutes.js';
 import AuthRoutes from './routes/AuthRoutes.js';
@@ -35,7 +36,8 @@ async function startApp() {
 
   // Middlewares
   app.use(bodyParser.json());
-
+  app.use(cookieParser());
+  
   // Routes
   app.use('/books', BookRoutes);
   app.use('/', AuthRoutes);
