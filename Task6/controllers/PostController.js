@@ -27,7 +27,7 @@ const createPost = async (req, res) => {
 
         const newPost = await Post.create(postData);
         res.status(201).json(newPost);
-        
+
     } catch (error) {
         console.error(error); 
         res.status(500).json({ message: error.message });
@@ -97,7 +97,15 @@ const updatePost = async (req, res) => {
             return res.status(403).json({ message: "You are not allowed to update a post to public." });
         }
 
-        await post.update(req.body);
+        if(req.body.title){
+            post.title = req.body.title;
+        }
+
+        if(req.body.body){
+            post.body = req.body.body;
+        }
+
+        await post.save();
         res.status(200).json(post);
     } catch (error) {
         res.status(500).json({ message: error.message });
